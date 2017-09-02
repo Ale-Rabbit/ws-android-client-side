@@ -9,7 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import consumer.UsuarioConsumer;
 import pojo.Usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TelaLogin extends AppCompatActivity {
 
@@ -19,6 +23,7 @@ public class TelaLogin extends AppCompatActivity {
     private SharedPreferences spLogin;
     private SharedPreferences.Editor editor;
     public static final String NOME_ARQUIVO = "preferences";
+    private UsuarioConsumer usuarioConsumer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +45,7 @@ public class TelaLogin extends AppCompatActivity {
 
                 usuario.setLogin(etLogin.getText().toString());
                 usuario.setSenha(etSenha.getText().toString());
-
-                if(validaLogin(usuario)!=null){
-                    editor.putString("login", usuario.getLogin());
-                    editor.commit();
-                    Intent itTelaLogado = new Intent(getApplicationContext(), TelaLogado.class);
-                    itTelaLogado.putExtra("usuario", usuario);
-                    startActivity(itTelaLogado);
-                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Usuário não encontrado!", Toast.LENGTH_LONG).show();
-                }
+                validaLogin(usuario.getLogin(), usuario.getSenha());
 
             }
         });
@@ -73,10 +68,30 @@ public class TelaLogin extends AppCompatActivity {
         this.usuario = new Usuario();
         this.spLogin = getApplicationContext().getSharedPreferences(NOME_ARQUIVO, MODE_APPEND);
         this.editor = spLogin.edit();
+        this.usuarioConsumer = new UsuarioConsumer();
     }
 
-    private Usuario validaLogin(Usuario usuario){
-        // Implementar consumo do WS para autenticar
+    private Usuario validaLogin(String login, String senha){
+
+        this.usuarioConsumer.postAutentica(login, senha).enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if(response.isSuccessful()){
+                    editor.putString("login", usuario.getLogin());
+                    editor.commit();
+                    Intent itTelaLogado = new Intent(getApplicationContext(), TelaLogado.class);
+                    itTelaLogado.putExtra("usuario", usuario);
+                    startActivity(itTelaLogado);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+
+            }
+        });
+
         return usuario;
     }
 }
