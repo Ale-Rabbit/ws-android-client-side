@@ -42,4 +42,16 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="130dp" />
+
+    <TextView
+        android:id="@+id/tv_criar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp"
+        android:text="Criar conta"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

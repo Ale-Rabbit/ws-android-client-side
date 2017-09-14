@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import consumer.UsuarioConsumer;
@@ -20,6 +21,7 @@ public class TelaLogin extends AppCompatActivity {
     private EditText etLogin, etSenha;
     private Button btLogin;
     private Usuario usuario;
+    private TextView tvCriarConta;
     private SharedPreferences spLogin;
     private SharedPreferences.Editor editor;
     public static final String NOME_ARQUIVO = "preferences";
@@ -50,6 +52,15 @@ public class TelaLogin extends AppCompatActivity {
             }
         });
 
+        tvCriarConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itTelaCadastro = new Intent(TelaLogin.this, TelaCadastro.class);
+                startActivity(itTelaCadastro);
+                finish();
+            }
+        });
+
     }
 
     private boolean verificaLogin(){
@@ -68,6 +79,7 @@ public class TelaLogin extends AppCompatActivity {
         this.usuario = new Usuario();
         this.spLogin = getApplicationContext().getSharedPreferences(NOME_ARQUIVO, MODE_APPEND);
         this.editor = spLogin.edit();
+        this.tvCriarConta = (TextView) findViewById(R.id.tv_criar);
         this.usuarioConsumer = new UsuarioConsumer();
     }
 
@@ -94,4 +106,6 @@ public class TelaLogin extends AppCompatActivity {
 
         return usuario;
     }
+
+
 }

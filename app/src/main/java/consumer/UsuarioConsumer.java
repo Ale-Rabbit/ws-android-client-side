@@ -28,5 +28,9 @@ public class UsuarioConsumer {
         return this.usuarioService.postAutentica(login, senha);
     }
 
+    public Call<Usuario> postCadastrar(Usuario u){
+        return this.usuarioService.postCadastrar(u);
+    }
+
 }
 

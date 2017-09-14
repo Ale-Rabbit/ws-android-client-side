@@ -2,6 +2,7 @@ package consumer;
 
 import pojo.Usuario;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -11,13 +12,15 @@ import retrofit2.http.Path;
 
 public interface IUsuarioService {
 
-    static final String URL_BASE = "http://localhost:8080/compubras";
+    static final String URL_BASE = "http://10.0.0.2:8080/compubras";
 
     // Realiza uma requisição do tipo POST com a URI /usuario/login/senha
     // Esse método é utilizado no UsuarioConsumer
     @POST("/usuario/{login}/{senha}")
     Call<Usuario> postAutentica(@Path("login") String login, @Path("senha") String senha);
 
+    @POST("/usuario/")
+    Call<Usuario> postCadastrar(@Body Usuario u);
 
 
 }
