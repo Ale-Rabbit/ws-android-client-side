@@ -1,5 +1,7 @@
 package pojo;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,7 @@ import java.io.Serializable;
 public class Usuario implements Serializable{
 
     private String nome, login, senha;
+    private Integer id;
 
     public String getNome() {
         return nome;
@@ -32,5 +35,13 @@ public class Usuario implements Serializable{
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

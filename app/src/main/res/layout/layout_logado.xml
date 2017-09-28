@@ -13,7 +13,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        android:text="Logado!"
         android:textSize="20dp" />
 
     <Button
@@ -24,4 +23,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="165dp"
         android:text="deslogar" />
+
+    <Button
+        android:id="@+id/bt_editar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_deslogar"
+        android:layout_alignEnd="@+id/bt_deslogar"
+        android:layout_marginBottom="37dp"
+        android:text="Editar" />
 </RelativeLayout>

@@ -21,7 +21,9 @@ public class UsuarioConsumer {
                 baseUrl(IUsuarioService.URL_BASE).
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
+
         this.usuarioService = retrofit.create(IUsuarioService.class);
+
     }
 
     public Call<Usuario> postAutentica(String login, String senha){
@@ -30,6 +32,10 @@ public class UsuarioConsumer {
 
     public Call<Usuario> postCadastrar(Usuario u){
         return this.usuarioService.postCadastrar(u);
+    }
+
+    public Call<Usuario> putAtualizar(Usuario u){
+        return this.usuarioService.putAtualizar(u);
     }
 
 }
