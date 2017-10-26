@@ -32,4 +32,13 @@
         android:layout_alignEnd="@+id/bt_deslogar"
         android:layout_marginBottom="37dp"
         android:text="Editar" />
+
+    <Button
+        android:id="@+id/bt_lista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_editar"
+        android:layout_alignStart="@+id/bt_editar"
+        android:layout_marginBottom="42dp"
+        android:text="listar todos" />
 </RelativeLayout>

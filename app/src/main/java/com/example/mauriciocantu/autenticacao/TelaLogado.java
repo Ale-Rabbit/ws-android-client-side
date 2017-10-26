@@ -7,18 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import consumer.UsuarioConsumer;
 import pojo.Usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.mauriciocantu.autenticacao.TelaLogin.NOME_ARQUIVO;
 
 public class TelaLogado extends AppCompatActivity {
 
     private TextView tvLogado;
-    private Button btDeslogar, btEditar;
+    private Button btDeslogar, btEditar, btLista;
     private Usuario usuario;
     private SharedPreferences spLogin;
     private SharedPreferences.Editor editor;
+    private UsuarioConsumer usuarioConsumer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +33,8 @@ public class TelaLogado extends AppCompatActivity {
         setContentView(R.layout.layout_logado);
         inicializaComponentes();
 
-        tvLogado.setText("Bem vindo, " + usuario.getNome());
+
+        //tvLogado.setText("Bem vindo, " + usuario.getNome());
 
         if(getIntent().getSerializableExtra("usuario") != null){
             usuario = (Usuario) getIntent().getSerializableExtra("usuario");
@@ -49,9 +57,18 @@ public class TelaLogado extends AppCompatActivity {
         this.btEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itTelaEditar = new Intent(TelaLogado.this, TelaEditar.class);
+                Intent itTelaEditar = new Intent(TelaLogado.this, TelaAction.class);
                 itTelaEditar.putExtra("usuario", usuario);
+                itTelaEditar.putExtra("action", "editar");
                 startActivity(itTelaEditar);
+            }
+        });
+
+        this.btLista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itLista = new Intent(getApplicationContext(), ListaActivity.class);
+                startActivity(itLista);
             }
         });
     }
@@ -63,5 +80,8 @@ public class TelaLogado extends AppCompatActivity {
         this.usuario = (Usuario) getIntent().getSerializableExtra("usuario");
         this.spLogin = getApplicationContext().getSharedPreferences(NOME_ARQUIVO, MODE_APPEND);
         this.editor = spLogin.edit();
+        this.btLista = (Button) findViewById(R.id.bt_lista);
+        this.usuarioConsumer = new UsuarioConsumer();
     }
+
 }

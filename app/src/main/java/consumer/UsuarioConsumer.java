@@ -1,5 +1,9 @@
 package consumer;
 
+import android.content.Intent;
+
+import java.util.List;
+
 import pojo.Usuario;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -36,6 +40,18 @@ public class UsuarioConsumer {
 
     public Call<Usuario> putAtualizar(Usuario u){
         return this.usuarioService.putAtualizar(u);
+    }
+
+    public Call<Void> deleteUser(Integer id){
+        return this.usuarioService.deleteUser(id);
+    }
+
+    public Call<List<Usuario>> buscarTodos(){
+        return this.usuarioService.buscarTodos();
+    }
+
+    public Call<Usuario> getUser(Integer id) {
+        return this.usuarioService.getUsuario(id);
     }
 
 }

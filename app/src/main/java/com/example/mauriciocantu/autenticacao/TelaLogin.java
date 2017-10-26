@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import consumer.UsuarioConsumer;
 import pojo.Usuario;
@@ -55,7 +54,8 @@ public class TelaLogin extends AppCompatActivity {
         tvCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent itTelaCadastro = new Intent(TelaLogin.this, TelaCadastro.class);
+                Intent itTelaCadastro = new Intent(TelaLogin.this, TelaAction.class);
+                itTelaCadastro.putExtra("action", "cadastrar");
                 startActivity(itTelaCadastro);
                 finish();
             }
@@ -92,6 +92,7 @@ public class TelaLogin extends AppCompatActivity {
                     editor.putString("login", usuario.getLogin());
                     editor.commit();
                     Intent itTelaLogado = new Intent(getApplicationContext(), TelaLogado.class);
+                    usuario = response.body();
                     itTelaLogado.putExtra("usuario", usuario);
                     startActivity(itTelaLogado);
                     finish();

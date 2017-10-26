@@ -44,4 +44,9 @@ public class Usuario implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return this.getNome() + " : " + this.getLogin() + " : " + this.getId();
+    }
 }
